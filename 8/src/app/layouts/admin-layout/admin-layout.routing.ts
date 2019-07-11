@@ -4,7 +4,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-
+import { ModalComponent } from '../../modal/modal.component';
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -51,6 +51,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'user-list',     component: UserListComponent },
-   
+    { path: 'modal',        component: ModalComponent },
     { path: 'upgrade',        component: UpgradeComponent },
 ];

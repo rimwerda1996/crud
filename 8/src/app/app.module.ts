@@ -21,7 +21,6 @@ import {
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ResourceListeComponent } from './resource-liste/resource-liste.component';
 import { ProjetListComponent } from './projet-list/projet-list.component';
-import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   imports: [
@@ -41,9 +40,10 @@ import { ModalComponent } from './modal/modal.component';
     AdminLayoutComponent,
     ResourceListeComponent,
     ProjetListComponent,
-    ModalComponent,
+  
 
   ],
+ 
   providers: [],
   bootstrap: [AppComponent]
 })

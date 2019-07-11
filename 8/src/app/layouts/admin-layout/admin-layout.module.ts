@@ -6,6 +6,9 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { UserListComponent } from '../../user-list/user-list.component';
+import { ModalComponent } from '../../modal/modal.component';
+import { NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 
@@ -29,15 +32,19 @@ import {
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    NgbModalModule,
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     UserListComponent,
+    ModalComponent,
    
    
     UpgradeComponent,
-  ]
+  ],
+
+  entryComponents: [ModalComponent],
 })
 
 export class AdminLayoutModule {}
