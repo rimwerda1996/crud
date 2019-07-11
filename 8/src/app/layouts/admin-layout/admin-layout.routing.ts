@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { UserListComponent } from '../../user-list/user-list.component';
+import { ProjetListComponent } from '../../projet-list/projet-list.component';
+import { ResourceListeComponent } from '../../resource-liste/resource-liste.component';
+
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { ModalComponent } from '../../modal/modal.component';
 export const AdminLayoutRoutes: Routes = [
@@ -48,9 +50,12 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
+   
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'user-list',     component: UserListComponent },
+    { path: 'projet-list',     component: ProjetListComponent },
+    { path: 'resource-list',     component: ResourceListeComponent },
+
     { path: 'modal',        component: ModalComponent },
     { path: 'upgrade',        component: UpgradeComponent },
 ];

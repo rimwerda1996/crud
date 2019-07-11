@@ -3,11 +3,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
@@ -20,6 +20,8 @@ import {
   MatTooltipModule,
   MatSelectModule
 } from '@angular/material';
+import { ProjetListComponent } from '../../projet-list/projet-list.component';
+import { ResourceListeComponent } from '../../resource-liste/resource-liste.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,16 +37,19 @@ import {
     NgbModalModule,
   ],
   declarations: [
-    DashboardComponent,
+   
     UserProfileComponent,
     UserListComponent,
     ModalComponent,
+    ProjetListComponent,
+    ResourceListeComponent,
    
    
     UpgradeComponent,
   ],
 
-  entryComponents: [ModalComponent],
+  entryComponents: [ModalComponent,ProjetListComponent],
+ 
 })
 
 export class AdminLayoutModule {}

@@ -1,3 +1,54 @@
-<p>
-  resource-liste works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Users Table </h4>
+                      
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                 
+                                  <th>
+                                      Nom
+                                  </th>
+                                 <th>
+                                     Prenom 
+                                 </th>
+                                 <th>
+                                       Cin
+                                    </th>
+                                    <th>
+                                      supprimer
+                                   </th>
+                                   <th>
+                                    modifier
+                                 </th>
+
+                              </thead>
+                              <tbody>
+                                  
+                                    <tr *ngFor="let row of tabStag">
+                            
+                                        
+                                        <td>{{row.nom}}</td>
+                                        <td>{{row.prenom}}</td>
+                                        <!--<td>{{row.rib}}</td>
+                                        <td>{{row.date_naissance}}</td>-->
+                                        <td>{{row.email}}</td>
+                                        
+                                        <td><button class="btn" (click)="deleteStag(row.id)"><i class="fa fa-trash"></i></button></td>
+                                        <td><button class="btn" (click)="update(row.id)"><i class="fa fa-repeat"></i></button></td>
+                                        
+                                    </tr>
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          

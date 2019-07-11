@@ -1,3 +1,74 @@
-<p>
-  projet-list works!
-</p>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <app-user-profile></app-user-profile>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Users Table </h4>
+                      
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  
+                                  <th>
+                                      Nom
+                                  </th>
+                                 <th>
+                                     type projet 
+                                 </th>
+                                 <th>
+                                       budget
+                                    </th>
+                                    <th>
+                                      date debut
+                                   </th>
+                                   <th>
+                                    date fin
+                                 </th>
+                                 <th>
+                                  supprimer
+                               </th>
+                               <th>
+                                modifier
+                             </th>
+                              </thead>
+                              <tbody>
+                                  
+                                    <tr *ngFor="let row of tabStag">
+                            
+                                        
+                                        <td>{{row.nom}}</td>
+                                        <td>{{row.type_projet}}</td>
+                                        <!--<td>{{row.rib}}</td>
+                                        <td>{{row.date_naissance}}</td>-->
+                                        <td>{{row.budget}}</td>
+                                        <td>{{row.date_debut}}</td>
+                                        <td>{{row.date_fin}}</td>
+
+                                       
+                                        <td><button class="btn" (click)="deleteStag(row.id)"><i class="fa fa-trash"></i></button></td>
+                                        <td><button class="btn" (click)="open(content)"><i class="fa fa-repeat"></i></button></td>
+                                        
+                                    </tr>
+                                  
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
