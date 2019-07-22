@@ -54,7 +54,7 @@ import { ResourceListeComponent } from '../../resource-liste/resource-liste.comp
     UpgradeComponent,
   ],
 
-  entryComponents: [ModalComponent,ProjetListComponent],
+  entryComponents: [ProjetListComponent, ResourceListeComponent,UserListComponent],
  
 })
 

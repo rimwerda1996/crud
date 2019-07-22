@@ -43,7 +43,7 @@ export class ProjetService {
   getProj(page:number): Observable<any>{
     return this.http.get('http://localhost:9099/projet/page?page='+page);
   } 
- 
+
 
   
 }
