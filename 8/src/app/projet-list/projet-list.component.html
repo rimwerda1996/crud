@@ -1,24 +1,86 @@
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+    <h4 class="modal-title" id="modal-basic-title"></h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <app-user-profile></app-user-profile>
+          
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Edit Profile</h4>
+                     
+                  </div>
+                  <div class="card-body">
+                      <form #stagiaireForm="ngForm">
+                          <div class="row">
+
+                            
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                   
+                                    <input matInput placeholder="nom" type="text" name="nom"  [(ngModel)]="nom"> 
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="type projet" type="text" name="type_projet"  [(ngModel)]="type_projet">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="budget" type="text" name="budget"  [(ngModel)]="budget">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="date_debut" type="text" name="date_debut"  [(ngModel)]="date_debut">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="date_fin" type="text" name="date_fin"  [(ngModel)]="date_fin">
+                              </mat-form-field>
+                            </div>
+                        </div>
+                          
+                              
+                   
+                          
+                          
+                      </form>
+                  </div>
+              </div>
+         
+    
+
+
+
+
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="save(stagiaireForm)">Save</button>
   </div>
 </ng-template>
+
+
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Users Table </h4>
-                      
-                  </div>
+                        
+                   
+
+                      <h4 class="card-title "> Project Table </h4> 
+                     
+                    </div>
+                    
+                 
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table">
@@ -45,6 +107,8 @@
                                <th>
                                 modifier
                              </th>
+                             <th><button class="btn" (click)="open(content)"><i class="fa fa-plus"></i> </button></th>
+
                               </thead>
                               <tbody>
                                   
@@ -60,9 +124,8 @@
                                         <td>{{row.date_fin}}</td>
 
                                        
-                                        <td><button class="btn" (click)="deleteStag(row.id)"><i class="fa fa-trash"></i></button></td>
-                                        <td><button class="btn" (click)="open(content)"><i class="fa fa-repeat"></i></button></td>
-                                        
+                                        <td><button class="btn" (click)="deleteProj(row.id)"><i class="fa fa-trash"></i></button></td>
+                                        <td><button class="btn" (click)="update(row.id)" ><i class="fa fa-repeat"> </i></button></td>
                                     </tr>
                                   
                               </tbody>

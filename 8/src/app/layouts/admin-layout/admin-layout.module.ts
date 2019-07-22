@@ -8,6 +8,8 @@ import { UserListComponent } from '../../user-list/user-list.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { ProjetProfileComponent } from '../../projet-profile/projet-profile.component';
+import { ResourceProfileComponent } from '../../resource-liste/resource-profile.component';
 
 
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
@@ -43,6 +45,10 @@ import { ResourceListeComponent } from '../../resource-liste/resource-liste.comp
     ModalComponent,
     ProjetListComponent,
     ResourceListeComponent,
+    ProjetProfileComponent,
+    ResourceProfileComponent,
+   
+
    
    
     UpgradeComponent,

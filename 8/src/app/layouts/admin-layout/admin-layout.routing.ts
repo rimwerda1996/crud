@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
+import { ResourceProfileComponent } from '../../resource-liste/resource-profile.component';
+import { ProjetProfileComponent } from '../../projet-profile/projet-profile.component';
 import { UserListComponent } from '../../user-list/user-list.component';
 import { ProjetListComponent } from '../../projet-list/projet-list.component';
 import { ResourceListeComponent } from '../../resource-liste/resource-liste.component';
@@ -52,6 +54,9 @@ export const AdminLayoutRoutes: Routes = [
     // }
    
     { path: 'user-profile',   component: UserProfileComponent },
+    { path: 'resource-profile',   component: ResourceProfileComponent },
+    { path: 'projet-profile',   component: ProjetProfileComponent },
+
     { path: 'user-list',     component: UserListComponent },
     { path: 'projet-list',     component: ProjetListComponent },
     { path: 'resource-list',     component: ResourceListeComponent },

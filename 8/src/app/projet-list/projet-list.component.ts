@@ -1,11 +1,10 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from './projet.service';
 import {Router} from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { format } from 'url';
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { User } from './../components/User';
  declare interface TableData {
     headerRow: string[];
     dataRows: string[][];
@@ -24,7 +23,7 @@ export class ProjetListComponent implements OnInit {
   public tableData1: TableData;
   public tableData2: TableData;
   public tabStag: Array <any>;
-  public tabStag1: FormGroup;
+  public tabStag1: Array <any>;
   public nom : String;
 
   public dated : Date;
@@ -34,7 +33,9 @@ export class ProjetListComponent implements OnInit {
   private page:number = 0;
   private pages:Array<any>;
   private i:number;
-  
+  stagiaireForm : FormGroup;
+  data : User;
+ 
   
 
 
@@ -55,7 +56,10 @@ this.page=i;
 this.getProjetPage(); 
 } 
 open(content) {
-  this.modalService.open(content,{ size: 'lg' });
+  
+  this.modalService.open(content,{ size: 'lg' },);
+  
+  
 }
   
 affiche() {
@@ -71,14 +75,32 @@ this.projetService.getProj(this.page).subscribe(data =>{
   this.pages= new Array(data['totalPages']);
 });
 } 
+
 ajouter(){
 this.projetService.changeClick("ajouter");
 this.router.navigate(['/user']);
 
 }
 
+
+save(data): void{
+  console.log(this.nom);
+ 
+  const user= data.value;
+ 
+  
+      this.projetService.addProj(user).subscribe(
+    res=>{
+      this.affiche();
+    }
+  );
+  this.router.navigate(['/projet-list']);
+}
+
+
+
 update(id){
-this.projetService.getById(id).subscribe( (data:FormGroup)  => {
+this.projetService.getById(id).subscribe( (data:Array<any>)  => {
   this.tabStag1 = data;
   this.projetService.changeMessage(this.tabStag1);
   this.projetService.changeClick("modifier");
@@ -86,7 +108,7 @@ this.projetService.getById(id).subscribe( (data:FormGroup)  => {
   this.tabStag1['id']=id;
   console.log(this.tabStag1);
   
-  this.router.navigate(['/updateStagiaire']);
+  this.router.navigate(['/projet-profile']);
   });
   
 }

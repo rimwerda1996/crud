@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ResourceService } from './resource.service';
 import {Router} from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { User } from './../components/User';
 
 
  declare interface TableData {
@@ -17,7 +19,7 @@ export class ResourceListeComponent implements OnInit {
   public tableData1: TableData;
   public tableData2: TableData;
   public tabStag: Array <any>;
-  public tabStag1: FormGroup;
+  public tabStag1:Array <any>; 
   public nom : String;
   public prenom: String;
   public cin : String;
@@ -27,11 +29,16 @@ export class ResourceListeComponent implements OnInit {
   private page:number = 0;
   private pages:Array<any>;
   private i:number;
+  stagiaireForm : FormGroup;
+  data : User;
+ 
   
   
 
 
-constructor(private  resourceService: ResourceService,private router: Router ) { 
+constructor(private  resourceService: ResourceService,private router: Router,config: NgbModalConfig, private modalService: NgbModal ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
   
 }
 
@@ -46,7 +53,13 @@ this.page=i;
 this.getResourcePage(); 
 } 
   
+open(content) {
   
+    this.modalService.open(content,{ size: 'lg' },);
+    
+    
+  }
+    
 affiche() {
   this.resourceService.getAll().subscribe(data => {
       this.tabStag = data;
@@ -65,17 +78,33 @@ this.resourceService.changeClick("ajouter");
 this.router.navigate(['/user']);
 
 }
+save(data): void{
+    console.log(this.nom);
+   
+    const user= data.value;
+   
+    
+        this.resourceService.addRes(user).subscribe(
+      res=>{
+        this.affiche();
+      }
+    );
+    this.router.navigate(['/resource-list']);
+  }
+  
+
+
 
 update(id){
-this.resourceService.getById(id).subscribe( (data:FormGroup)  => {
+this.resourceService.getById(id).subscribe( (data:Array<any>)  => {
   this.tabStag1 = data;
   this.resourceService.changeMessage(this.tabStag1);
   this.resourceService.changeClick("modifier");
   console.log(id);
   this.tabStag1['id']=id;
-  console.log(this.tabStag1);
   
-  this.router.navigate(['/updateStagiaire']);
+  
+  this.router.navigate(['/resource-profile']);
   });
   
 }

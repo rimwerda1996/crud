@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms'
 import {Router} from '@angular/router';
-import { UserService } from '../user-list/user.service';
+import { ResourceService } from './resource.service';
 import { User } from './../components/User';
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-
+  selector: 'app-resource-profile',
+  templateUrl: './resource-profile.component.html',
+  styleUrls: ['./resource-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+export class ResourceProfileComponent implements OnInit {
   public tabStag: Array <any>;
   stagiaireForm : FormGroup;
   click: string;
@@ -22,14 +22,14 @@ export class UserProfileComponent implements OnInit {
   i : string;
   public tabStag2: User[];
  
-  constructor(private  stagiaireService: UserService,private router: Router) { }
+  constructor(private  stagiaireService: ResourceService,private router: Router) { }
 
   ngOnInit() {
     this.stagiaireService.currentMessage.subscribe(message => this.tabStag2 = message);
     this.stagiaireService.bool.subscribe(message => this.click = message)  
     if(this.click=="modifier"){
     this.email = this.tabStag2['email'];
-    this.cin = this.tabStag2['cin'];
+   
     this.nom = this.tabStag2['nom'];
     this.prenom = this.tabStag2['prenom'];
     this.i=(this.tabStag2["id"]);
@@ -54,12 +54,12 @@ export class UserProfileComponent implements OnInit {
   saveStagiaire(data): void {
     const user= data.value;
    
-        this.stagiaireService.updateUser(this.i,user).subscribe(
+        this.stagiaireService.updateRes(this.i,user).subscribe(
       res=>{
         this.affiche();
       }
     );
-    this.router.navigate(['/user-list']);
+    this.router.navigate(['/resource-list']);
 
     }
   }

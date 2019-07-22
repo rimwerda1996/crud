@@ -41,7 +41,7 @@ import { ResourceService } from './resource-liste/resource.service';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-   
+    
   
 
   ],

@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-
+import { User } from 'app/components/user';
 @Injectable()
 export class ResourceService {
 
-  user : FormGroup;
-  private data = new BehaviorSubject(this.user);
+  user : User[]; 
+   private data = new BehaviorSubject(this.user);
   currentMessage = this.data.asObservable();
   private click = new BehaviorSubject('add');
   bool = this.click.asObservable();
@@ -17,7 +17,7 @@ export class ResourceService {
   constructor(private http: HttpClient) {
   }
 
-  changeMessage(data: FormGroup) {
+  changeMessage(data: User[]) {
     this.data.next(data)
   }
 
@@ -34,9 +34,13 @@ export class ResourceService {
   deleteRes(id: string) {
     return this.http.delete('http://localhost:9099/resource/'+id)
   }
- 
-
-  getRes(page:number): Observable<any>{
+  addRes(stagiaire: User): Observable<any> {
+    return this.http.post('http://localhost:9099/resource/',stagiaire);
+  }
+  updateRes(id : string ,stagiaire: User ){
+    return this.http.put('http://localhost:9099/resource/'+id,stagiaire);}
+  
+    getRes(page:number): Observable<any>{
     return this.http.get('http://localhost:9099/resource/page?page='+page);
   } 
  

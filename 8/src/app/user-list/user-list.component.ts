@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { User } from './../components/User';
 import {Router} from '@angular/router';
 import { FormGroup } from '@angular/forms';
-
+import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 declare interface TableData {
   headerRow: string[];
@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
     public tableData1: TableData;
     public tableData2: TableData;
     public tabStag: Array <any>;
-    public tabStag1: FormGroup;
+    public tabStag1:Array <any>; 
     public nom : String;
     public prenom: String;
     public cin : String;
@@ -34,12 +34,14 @@ export class UserListComponent implements OnInit {
     private page:number = 0;
     private pages:Array<any>;
     private i:number;
-    
+    stagiaireForm : FormGroup;
+    data : User;
     
 
 
-  constructor(private  userService: UserService,private router: Router ) { 
-    
+  constructor(private  userService: UserService,private router: Router,config: NgbModalConfig, private modalService: NgbModal ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 
   ngOnInit() {
@@ -53,7 +55,12 @@ setPage(i,event:any){
   this.getUserPage();
 } 
     
-    
+open(content) {
+  
+  this.modalService.open(content,{ size: 'lg' },);
+  
+  
+}  
 affiche() {
     this.userService.getAll().subscribe(data => {
         this.tabStag = data;
@@ -73,8 +80,25 @@ ajouter(){
 
 }
 
+save(data): void{
+  console.log(this.nom);
+ 
+  const user= data.value;
+ 
+  
+      this.userService.addUser(user).subscribe(
+    res=>{
+      this.affiche();
+    }
+  );
+  this.router.navigate(['/user-list']);
+}
+
+
+
+
 update(id){
-  this.userService.getById(id).subscribe( (data:FormGroup)  => {
+  this.userService.getById(id).subscribe( (data:Array<any>)  => {
     this.tabStag1 = data;
     this.userService.changeMessage(this.tabStag1);
     this.userService.changeClick("modifier");
@@ -82,7 +106,7 @@ update(id){
     this.tabStag1['id']=id;
     console.log(this.tabStag1);
     
-    this.router.navigate(['/updateStagiaire']);
+    this.router.navigate(['/user-profile']);
     });
     
 }

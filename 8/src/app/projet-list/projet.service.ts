@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+ import { User } from 'app/components/user';
 
 @Injectable()
 export class ProjetService {
 
-  user : FormGroup;
+  user : User[];
   private data = new BehaviorSubject(this.user);
   currentMessage = this.data.asObservable();
   private click = new BehaviorSubject('add');
@@ -17,7 +17,7 @@ export class ProjetService {
   constructor(private http: HttpClient) {
   }
 
-  changeMessage(data: FormGroup) {
+  changeMessage(data: User[]) {
     this.data.next(data)
   }
 
@@ -35,7 +35,11 @@ export class ProjetService {
     return this.http.delete('http://localhost:9099/projet/'+id)
   }
  
-
+  addProj(stagiaire: User): Observable<any> {
+    return this.http.post('http://localhost:9099/projet/',stagiaire);
+  }
+  updateProj(id : string ,stagiaire: User ){
+    return this.http.put('http://localhost:9099/projet/'+id,stagiaire);}
   getProj(page:number): Observable<any>{
     return this.http.get('http://localhost:9099/projet/page?page='+page);
   } 

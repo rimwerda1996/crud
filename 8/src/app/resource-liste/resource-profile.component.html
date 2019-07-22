@@ -11,14 +11,11 @@
                       <form #stagiaireForm="ngForm" (ngSubmit)="saveStagiaire(stagiaireForm)">
                           <div class="row">
 
-                              <div class="col-md-3">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="CIN" name="cin"  [(ngModel)]="cin">
-                                  </mat-form-field>
-                              </div>
+                            
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email" name="email"  [(ngModel)]="email">
+                                   
+                                    <input matInput placeholder="Email address" type="email" name="email"  [(ngModel)]="email"> 
                                   </mat-form-field>
                               </div>
                           </div>
@@ -33,10 +30,11 @@
                                   <input matInput placeholder="Last Name" type="text" name="nom"  [(ngModel)]="nom">
                                 </mat-form-field>
                               </div>
+                              <button type="button" class="btn btn-outline-dark" (click)="saveStagiaire(stagiaireForm)" >Save</button>
                           </div>
                           
                               
-                          <button type="button" class="btn btn-outline-dark" (click)="saveStagiaire(stagiaireForm)" >Save</button>
+                   
                           
                           
                       </form>
