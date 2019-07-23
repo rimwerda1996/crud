@@ -12,46 +12,62 @@
                      
                   </div>
                   <div class="card-body">
-                      <form #stagiaireForm="ngForm">
+                      <form [formGroup]="form" name="form" (ngSubmit)="formSubmit()" >
                           <div class="row">
 
-                            
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
+                                <div class="form-group">
+                                  <div class="col-md-12">
+                                        <mat-form-field class="example-full-width">
                                    
-                                    <input matInput placeholder="nom" type="text" name="nom"  [(ngModel)]="nom"> 
+                                    <input matInput placeholder="nom" type="text"  class="form-control" formControlName="nom" [ngClass]="{'is-invalid':form.get('nom').touched && form.get('nom').invalid}" />
+                                    <div class="invalid-feedback">
+                                            <div> Name is required</div>
+                                          </div>
+                                        </mat-form-field>
+                                    
+                                  
+                                    </div>
+                                </div>
+
+                          </div>
+                          <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="type_projet" type="text"  class="form-control" formControlName="type_projet" [ngClass]="{'is-invalid':form.get('type_projet').touched && form.get('type_projet').invalid}" />
+                                        <div class="invalid-feedback">
+                                                <div>project type is required</div>
+                                              </div>
+                                   
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="budget" type="text" class="form-control" formControlName="budget" [ngClass]="{'is-invalid':form.get('budget').touched && form.get('budget').invalid}" />
+                                    <div class="invalid-feedback">
+                                            <div>budget is required</div>
+                                          </div>
                                   </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
+                                </div>
+                            </div>
+                            <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="type projet" type="text" name="type_projet"  [(ngModel)]="type_projet">
+                                  <input matInput placeholder="date_debut" type="date" class="form-control" formControlName="date_debut" [ngClass]="{'is-invalid':form.get('date_debut').touched && form.get('date_debut').invalid}" />
+                                  <div class="invalid-feedback">
+                                        <div>  required</div>
+                                      </div>
                                 </mat-form-field>
                               </div>
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="budget" type="text" name="budget"  [(ngModel)]="budget">
+                                  <input matInput placeholder="date_fin" type="date" class="form-control" formControlName="date_fin" [ngClass]="{'is-invalid':form.get('date_fin').touched && form.get('date_fin').invalid}" />
+                                  <div class="invalid-feedback">
+                                        <div>  required</div>
+                                      </div>
                                 </mat-form-field>
                               </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <mat-form-field class="example-full-width">
-                                <input matInput placeholder="date_debut" type="text" name="date_debut"  [(ngModel)]="date_debut">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-6">
-                              <mat-form-field class="example-full-width">
-                                <input matInput placeholder="date_fin" type="text" name="date_fin"  [(ngModel)]="date_fin">
-                              </mat-form-field>
-                            </div>
-                        </div>
-                          
+                              </div>
                               
-                   
-                          
-                          
                       </form>
                   </div>
               </div>
@@ -62,7 +78,7 @@
 
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="save(stagiaireForm)">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="formSubmit()" >Save</button>
   </div>
 </ng-template>
 
@@ -74,13 +90,11 @@
               <div class="card">
                   <div class="card-header card-header-danger">
                         
-                   
-
+            
                       <h4 class="card-title "> Project Table </h4> 
                      
                     </div>
                     
-                 
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table">
@@ -94,18 +108,18 @@
                                  </th>
                                  <th>
                                        budget
-                                    </th>
-                                    <th>
+                                </th>
+                                <th>
                                       date debut
-                                   </th>
-                                   <th>
-                                    date fin
-                                 </th>
-                                 <th>
-                                  supprimer
+                                </th>
+                                <th>
+                                      date fin
+                                </th>
+                                <th>
+                                      supprimer
                                </th>
                                <th>
-                                modifier
+                                     modifier
                              </th>
                              <th><button class="btn" (click)="open(content)"><i class="fa fa-plus"></i> </button></th>
 

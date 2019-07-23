@@ -12,7 +12,7 @@ import { User } from './../components/User';
 export class ProjetProfileComponent implements OnInit {
   public tabStag: Array <any>;
  
-  stagiaireForm : FormGroup;
+
   data : User;
   i : string;
   click: string;
@@ -25,11 +25,11 @@ export class ProjetProfileComponent implements OnInit {
  
   public tabStag2: User[];
  
-  constructor(private  stagiaireService: ProjetService,private router: Router) { }
+  constructor(private  projetService: ProjetService,private router: Router) { }
 
   ngOnInit() {
-    this.stagiaireService.currentMessage.subscribe(message => this.tabStag2 = message);
-    this.stagiaireService.bool.subscribe(message => this.click = message)  
+    this.projetService.currentMessage.subscribe(message => this.tabStag2 = message);
+    this.projetService.bool.subscribe(message => this.click = message)  
     if(this.click=="modifier"){
    
    
@@ -51,22 +51,18 @@ export class ProjetProfileComponent implements OnInit {
 
   
   }
-  affiche() {
-    this.stagiaireService.getAll().subscribe(data => {
-        this.tabStag = data;
-
-}
-)
-}
+ 
   updat(data): void {
-    const user= data.value;
+    const projet= data.value;
+    console.log(projet)
    
-        this.stagiaireService.updateProj(this.i,user).subscribe(
+        this.projetService.updateProj(this.i,projet).subscribe(
       res=>{
-        this.affiche();
+      
+        this.router.navigate(['/projet-list']);
       }
     );
-    this.router.navigate(['/projet-list']);
+    
 
     }
 

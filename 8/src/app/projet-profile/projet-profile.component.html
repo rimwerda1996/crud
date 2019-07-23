@@ -8,7 +8,7 @@
            
         </div>
         <div class="card-body">
-            <form #stagiaireForm="ngForm">
+            <form #projetForm="ngForm">
                 <div class="row">
 
                   
@@ -34,15 +34,15 @@
                 <div class="row">
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="date_debut" type="text" name="date_debut"  [(ngModel)]="date_debut">
+                      <input matInput placeholder="date_debut" type="date" name="date_debut"  [(ngModel)]="date_debut">
                     </mat-form-field>
                   </div>
                   <div class="col-md-6">
                     <mat-form-field class="example-full-width">
-                      <input matInput placeholder="date_fin" type="text" name="date_fin"  [(ngModel)]="date_fin">
+                      <input matInput placeholder="date_fin" type="date" name="date_fin"  [(ngModel)]="date_fin">
                     </mat-form-field>
                   </div>
-                  <button type="button" class="btn btn-outline-dark" (click)="updat(stagiaireForm)" >Save</button>
+                  <button type="button" class="btn btn-outline-dark" (click)="updat(projetForm)" >Save</button>
               </div>
                 
                     

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjetService } from './projet.service';
 import {Router} from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { format } from 'url';
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { User } from './../components/User';
@@ -28,27 +28,47 @@ export class ProjetListComponent implements OnInit {
 
   public dated : Date;
   public datef :Date ;
-  
+  public submited :Boolean;
 
   private page:number = 0;
   private pages:Array<any>;
   private i:number;
-  stagiaireForm : FormGroup;
-  data : User;
+  private form:FormGroup;
  
+  
+  
+  data : User;
   
 
 
-constructor(private  projetService: ProjetService,private router: Router,config: NgbModalConfig, private modalService: NgbModal ) { 
+constructor(private fb: FormBuilder,private  projetService: ProjetService,private router: Router,config: NgbModalConfig, private modalService: NgbModal ) { 
   config.backdrop = 'static';
   config.keyboard = false;
+
+  this.form = new FormGroup({
+    nom: new FormControl('', Validators.required),
+    type_projet: new FormControl('', Validators.required),
+    budget: new FormControl('', Validators.required),
+    date_debut: new FormControl('', Validators.required),
+    date_fin: new FormControl('', Validators.required),
+   
+  
+});
 
 }
 
 ngOnInit() {
   
   this.getProjetPage(); 
-} 
+  
+}
+formSubmit(){
+  if(this.form.valid){
+    console.log("yes")
+    this.save(this.form);
+  }
+}
+
 setPage(i,event:any){
 this.i=i;
 event.preventDefault();
@@ -61,7 +81,26 @@ open(content) {
   
   
 }
-  
+ 
+
+get name (){
+  return this.form.get('nom')
+}
+get budget(){
+  return this.form.get('budget')
+}
+get type_projet(){
+  return this.form.get('type_projet')
+}
+get date_debut(){
+  return this.form.get('date_debut')
+}
+get date_fin(){
+  return this.form.get('date_fin')
+}
+
+
+
 affiche() {
   this.projetService.getAll().subscribe(data => {
       this.tabStag = data;
@@ -84,10 +123,9 @@ this.router.navigate(['/user']);
 
 
 save(data): void{
-  console.log(this.nom);
  
   const user= data.value;
- 
+ console.log(user);
   
       this.projetService.addProj(user).subscribe(
     res=>{
@@ -104,7 +142,7 @@ this.projetService.getById(id).subscribe( (data:Array<any>)  => {
   this.tabStag1 = data;
   this.projetService.changeMessage(this.tabStag1);
   this.projetService.changeClick("modifier");
-  console.log(id);
+
   this.tabStag1['id']=id;
   console.log(this.tabStag1);
   
