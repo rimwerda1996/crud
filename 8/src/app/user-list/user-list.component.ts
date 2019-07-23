@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 import { User } from './../components/User';
 import {Router} from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl,Validators } from '@angular/forms';
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 declare interface TableData {
@@ -25,16 +25,13 @@ export class UserListComponent implements OnInit {
     public tableData2: TableData;
     public tabStag: Array <any>;
     public tabStag1:Array <any>; 
-    public nom : String;
-    public prenom: String;
-    public cin : String;
-    public email : String;
+   
     public tel : String;
     public contractTypeValid = "False";
     private page:number = 0;
     private pages:Array<any>;
     private i:number;
-    stagiaireForm : FormGroup;
+    form : FormGroup;
     data : User;
     
 
@@ -42,12 +39,43 @@ export class UserListComponent implements OnInit {
   constructor(private  userService: UserService,private router: Router,config: NgbModalConfig, private modalService: NgbModal ) { 
     config.backdrop = 'static';
     config.keyboard = false;
+    this.form = new FormGroup({
+      nom: new FormControl('', Validators.required),
+      prenom: new FormControl('', Validators.required),
+    cin: new FormControl('', Validators.required),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+      
+     
+    
+  });
   }
 
   ngOnInit() {
     
     this.getUserPage();
+
 } 
+formSubmit(){
+  if(this.form.valid){
+    console.log("yes")
+    this.save(this.form);
+  }
+}
+get nom (){
+  return this.form.get('nom')
+}
+get cin (){
+  return this.form.get('cin')
+}
+get email(){
+  return this.form.get('email')
+}
+get prenom(){
+  return this.form.get('prenom')
+}
 setPage(i,event:any){
   this.i=i;
   event.preventDefault();
@@ -120,52 +148,7 @@ deleteStag(id){
   
 }
 
-SearchByCin(){
-  if (this.cin != "") {
-      this.tabStag = this.tabStag.filter(response => {return response.cin.toLocaleLowerCase().match(this.cin.toLocaleLowerCase());
-      });
-    
-  }
- 
-      else if (this.cin == ""  ){
-        this.ngOnInit();
-  }
 
-}
-SearchByNom(){
-  if (this.nom != "") {
-      this.tabStag = this.tabStag.filter(response => {return response.nom.toLocaleLowerCase().match(this.nom.toLocaleLowerCase());
-      });
-    }
-
-    else if (this.nom == "" ){ 
-        this.ngOnInit();
-    }
-  
-  
-}
-
-SearchByPrenom(){
-  if (this.prenom != "") {
-      this.tabStag = this.tabStag.filter(response => {return response.prenom.toLocaleLowerCase().match(this.prenom.toLocaleLowerCase());
-      });
-
-  }
-  else if (this.prenom == "" ){
-      this.ngOnInit();
-  }
-}
-
-SearchByEmail(){
-  if (this.email != "") {
-      this.tabStag = this.tabStag.filter(response => {return response.email.toLocaleLowerCase().match(this.email.toLocaleLowerCase());
-      });
-
-  }
-  else if (this.email == "" ){
-      this.ngOnInit();
-  }
-}
 SearchByTel(){
   if (this.tel != "") {
       this.tabStag = this.tabStag.filter(response => {return response.tel.toLocaleLowerCase().match(this.tel.toLocaleLowerCase());

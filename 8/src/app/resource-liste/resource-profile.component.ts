@@ -22,11 +22,11 @@ export class ResourceProfileComponent implements OnInit {
   i : string;
   public tabStag2: User[];
  
-  constructor(private  stagiaireService: ResourceService,private router: Router) { }
+  constructor(private  resourceService: ResourceService,private router: Router) { }
 
   ngOnInit() {
-    this.stagiaireService.currentMessage.subscribe(message => this.tabStag2 = message);
-    this.stagiaireService.bool.subscribe(message => this.click = message)  
+    this.resourceService.currentMessage.subscribe(message => this.tabStag2 = message);
+    this.resourceService.bool.subscribe(message => this.click = message)  
     if(this.click=="modifier"){
     this.email = this.tabStag2['email'];
    
@@ -44,22 +44,15 @@ export class ResourceProfileComponent implements OnInit {
 
   
   }
-  affiche() {
-    this.stagiaireService.getAll().subscribe(data => {
-        this.tabStag = data;
-
-}
-)
-}
+  
   saveStagiaire(data): void {
     const user= data.value;
    
-        this.stagiaireService.updateRes(this.i,user).subscribe(
+        this.resourceService.updateRes(this.i,user).subscribe(
       res=>{
-        this.affiche();
-      }
+        this.router.navigate(['/resource-list']);      }
     );
-    this.router.navigate(['/resource-list']);
+   
 
     }
   }

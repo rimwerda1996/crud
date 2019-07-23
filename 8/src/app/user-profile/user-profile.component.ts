@@ -10,7 +10,7 @@ import { User } from './../components/User';
 })
 export class UserProfileComponent implements OnInit {
   public tabStag: Array <any>;
-  stagiaireForm : FormGroup;
+
   click: string;
   email : String;
   password : String;
@@ -22,11 +22,11 @@ export class UserProfileComponent implements OnInit {
   i : string;
   public tabStag2: User[];
  
-  constructor(private  stagiaireService: UserService,private router: Router) { }
+  constructor(private  userService: UserService,private router: Router) { }
 
   ngOnInit() {
-    this.stagiaireService.currentMessage.subscribe(message => this.tabStag2 = message);
-    this.stagiaireService.bool.subscribe(message => this.click = message)  
+    this.userService.currentMessage.subscribe(message => this.tabStag2 = message);
+    this.userService.bool.subscribe(message => this.click = message)  
     if(this.click=="modifier"){
     this.email = this.tabStag2['email'];
     this.cin = this.tabStag2['cin'];
@@ -44,23 +44,16 @@ export class UserProfileComponent implements OnInit {
 
   
   }
-  affiche() {
-    this.stagiaireService.getAll().subscribe(data => {
-        this.tabStag = data;
-
-}
-)
-}
-  saveStagiaire(data): void {
+ 
+  save(data): void {
     const user= data.value;
    
-        this.stagiaireService.updateUser(this.i,user).subscribe(
+        this.userService.updateUser(this.i,user).subscribe(
       res=>{
-        this.affiche();
+        this.router.navigate(['/user-list']);
       }
     );
-    this.router.navigate(['/user-list']);
-
+   
     }
   }
 

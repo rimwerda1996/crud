@@ -12,37 +12,49 @@
                            
                         </div>
                         <div class="card-body">
-                                <form #stagiaireForm="ngForm" (ngSubmit)="saveStagiaire(stagiaireForm)">
+                                <form [formGroup]="form" name="form" (ngSubmit)="formSubmit()" >
+                                       
                                         <div class="row">
-              
-                                            <div class="col-md-3">
+                                              <div class="col-md-6">
                                                 <mat-form-field class="example-full-width">
-                                                  <input matInput placeholder="CIN" name="cin"  [(ngModel)]="cin">
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="col-md-4">
+                                                      <input matInput placeholder="cin" type="text"  class="form-control" formControlName="cin" [ngClass]="{'is-invalid':form.get('cin').touched && form.get('cin').invalid}" />
+                                                      <div class="invalid-feedback">
+                                                              <div>required</div>
+                                                            </div>
+                                                 
+                                                  </mat-form-field>
+                                              </div>
+                                              <div class="col-md-6">
                                                 <mat-form-field class="example-full-width">
-                                                  <input matInput placeholder="Email address" type="email" name="email"  [(ngModel)]="email">
+                                                  <input matInput placeholder="email" type="email" class="form-control" formControlName="email" [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" />
+                                                  <div class="invalid-feedback">
+                                                          <div> required, email type </div>
+                                                        </div>
                                                 </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                                              </div>
+                                          </div>
+                                          <div class="row">
                                             <div class="col-md-6">
                                               <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Fist Name" type="text" name="prenom"  [(ngModel)]="prenom">
+                                                <input matInput placeholder="nom" type="text" class="form-control" formControlName="nom" [ngClass]="{'is-invalid':form.get('nom').touched && form.get('nom').invalid}" />
+                                                <div class="invalid-feedback">
+                                                      <div>   required</div>
+                                                    </div>
                                               </mat-form-field>
                                             </div>
                                             <div class="col-md-6">
                                               <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Last Name" type="text" name="nom"  [(ngModel)]="nom">
+                                                <input matInput placeholder="prenom" type="text" class="form-control" formControlName="prenom" [ngClass]="{'is-invalid':form.get('prenom').touched && form.get('prenom').invalid}" />
+                                                <div class="invalid-feedback">
+                                                      <div>  required</div>
+                                                    </div>
                                               </mat-form-field>
                                             </div>
-                                        </div>
-                                        
+                                            </div>
+                                            
                                             
                                        
-                                        
-                                        
+            
                                     </form>
                                 </div>
                             </div>
@@ -50,7 +62,7 @@
     
               
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-dark" (click)="save(stagiaireForm)">Save</button>
+                  <button type="button" class="btn btn-outline-dark" (click)="formSubmit()">Save</button>
                 </div>
               </ng-template>
               
@@ -115,7 +127,7 @@
                                        
                                        
                                         <td><button class="btn" (click)="deleteStag(row.id)"><i class="fa fa-trash"></i></button></td>
-                                        <td><button class="btn" (click)="update(row.id)"><i class="fa fa-repeat"></i></button></td>
+                                        <td><button class="btn" (click)="update(row.id)"><i class="fa fa-edit"></i></button></td>
                                         
                                     </tr>
                                   
